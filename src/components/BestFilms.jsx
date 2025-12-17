@@ -19,11 +19,11 @@ function BestFilms({ films = [] }) {
 
   return (
     <div className="bg-[#201f20] ">
-      <div className="w-5xl m-auto">
-        <h1 className="text-white pt-3 pl-4 text-3xl font-bold">
+      <div className="max-w-7xl m-auto">
+        <h1 className="text-white pt-3 pl-4 text-2xl md:text-3xl font-bold">
           Лучшие фильмы и сериалы мира
         </h1>
-        <div className="grid grid-cols-4 gap-4 p-4 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 ">
           {films.map((film, index) => (
             <div
               className="cursor-pointer relative group"
@@ -65,8 +65,8 @@ function BestFilms({ films = [] }) {
                 alt={film.title}
               />
 
-              <h2 className="text-[#3ec1ff] text-lg mt-2">{film.title}</h2>
-              <p className="text-[#999] text-sm">{film.director}</p>
+              <h2 className="text-[#3ec1ff] text-base md:text-lg mt-2 line-clamp-2">{film.title}</h2>
+              <p className="text-[#999] text-xs md:text-sm line-clamp-1">{film.director}</p>
             </div>
           ))}
         </div>

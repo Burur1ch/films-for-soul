@@ -6,11 +6,14 @@ import films from "./data/films";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredFilms = films.filter(film => film.title.toLowerCase().includes(searchTerm.toLowerCase()));
   return (
     <>
       <MainHeader />
-      <SearchBar />
-      <BestFilms films={films} />
+      <SearchBar onSearch={setSearchTerm} />
+      <BestFilms films={filteredFilms} />
     </>
   );
 }

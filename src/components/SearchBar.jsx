@@ -1,35 +1,36 @@
 import { useEffect, useState } from "react";
 import useDebounce from "../hooks/useDebounce";
-function SearchBar() {
+function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
   useEffect(() => {
     if (debouncedSearchTerm) {
-      console.log("Search for:", debouncedSearchTerm);
+      onSearch(debouncedSearchTerm);
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, onSearch]);
   return (
-    <>
-      <div className="bg-[#111] w-full h-16">
-        <div className="flex justify-between px-4 w-5xl mx-auto h-full items-center">
-          <p className="text-white">Будь в курсе новинок</p>
-          <div>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-              }}
-              placeholder="Восьмая миля"
-              className="border h-9 bg-[#282828] border-[#333] text-white px-2 py-1 text-white placeholder-white focus:outline-none"
-            />
-            <button className="bg-[#c00] h-9 text-white px-3 py-1">
-              Найти
-            </button>
-          </div>
+    <div className="bg-[#111] w-full h-auto md:h-16">
+      <div className="flex flex-col md:flex-row justify-between gap-3 md:gap-0 px-4 max-w-7xl mx-auto h-full py-3 md:py-0 items-start md:items-center">
+        <p className="text-white text-sm md:text-base">Будь в курсе новинок</p>
+        <div className="flex gap-2 w-full md:w-auto">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+            placeholder="Восьмая миля"
+            className="flex-1 md:flex-none border h-9 bg-[#282828] border-[#333] text-white px-2 py-1 placeholder-white focus:outline-none text-sm"
+          />
+          <button
+            className="bg-[#c00] h-9 text-white px-3 py-1 text-sm whitespace-nowrap hover:bg-[#a00] transition"
+            onClick={() => onSearch("")}
+          >
+            Убрать
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
